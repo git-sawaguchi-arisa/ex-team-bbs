@@ -2,19 +2,19 @@ package com.example.form;
 
 public class CommentForm {
 
-	public Integer id;
+	public String id;
 	
 	public String name;
 	
 	public String content;
 	
-	public Integer articleId;
+	public String articleId;
 
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -34,11 +34,17 @@ public class CommentForm {
 		this.content = content;
 	}
 
-	public Integer getArticleId() {
+	public String getArticleId() {
 		return articleId;
 	}
 
-	public void setArticleId(Integer articleId) {
+	public void setArticleId(String articleId) {
 		this.articleId = articleId;
-	} 
+	}
+
+	
+
+	
+
+	
 }
