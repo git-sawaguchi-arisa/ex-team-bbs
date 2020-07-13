@@ -18,4 +18,7 @@ public class CommentService {
         List<Comment> commentList=commentRepository.findByArticleId(articleId);
         return commentList;
     }
+    public void insert(Comment comment) {
+		commentRepository.insert(comment);
+	}
 }

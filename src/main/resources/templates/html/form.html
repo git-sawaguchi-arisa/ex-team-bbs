@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset='utf-8'>
-<title>Page Title</title>
-    
+  <meta charset='utf-8'>
+  <title>Page Title</title>
+
 </head>
+
 <body>
-  <form action="form.html" th:action="@{/team-bbs}" th:object="${articleForm}">
-投稿者名:<input type="text" th:field="*{name}"><br>
-投稿内容:<textarea th:field="*{content}"></textarea><br>
-<button>記事投稿</button>
-</form>
-<hr>
-<br>
-<div th:each="article:${articleList}">
-投稿者名:<span th:text="${article.name}"></span><br>
-投稿内容:<br>
-<span th:text="${article.content}"></span><br>
-<form action="form.html" th:action="@{/}">
-<input type="hidden" name="id" th:value="${article.id}">
-<button>記事削除</button>
-</form>
-<div th:if="${commentList}" th:each="comment:${commentList}">
-コメント者名:<span th:text="${comment.name}"></span><br>
-コメント内容:<br>
-<span th:text="${comment.content}"></span>
-</div>
-<form action="form.html" th:action="@{/}" th:object="${commentForm}">
-名前:<br>
-<input type="text" name="*{name}"><br>
-コメント:<br>
-<textarea name="*{content}"></textarea><br>
-<button>コメント投稿</button>
-</form>
-<hr>
-</div>
+  <form action="form.html" th:action="@{/team-bbs/articleInsert}" th:object="${articleForm}">
+    投稿者名:<input type="text" th:field="*{name}"><br>
+    投稿内容:<textarea th:field="*{content}"></textarea><br>
+    <button>記事投稿</button>
+  </form>
+  <hr>
+  <br>
+  <div th:each="article:${articleList}">
+    投稿者名:<span th:text="${article.name}"></span><br>
+    投稿内容:<br>
+    <span th:text="${article.content}"></span><br>
+    <form action="form.html" th:action="@{/}">
+      <input type="hidden" name="id" th:value="${article.id}">
+      <button>記事削除</button>
+    </form>
+    <div th:if="${article.commentList}" th:each="comment:${article.commentList}">
+      コメント者名:<span th:text="${comment.name}"></span><br>
+      コメント内容:<br>
+      <span th:text="${comment.content}"></span>
+    </div>
+    <form action="form.html" th:action="@{/team-bbs/commentInsert}" th:object="${commentForm}">
+      名前:<br>
+      <input type="text" name="name" th:field="*{name}"><br>
+      コメント:<br>
+      <textarea name="content" th:field="*{content}"></textarea><br>
+      <input type="hidden" name="articleId" th:value="${article.id}">
+      <button>コメント投稿</button>
+    </form>
+    <hr>
+  </div>
 </body>
+
 </html>

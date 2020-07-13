@@ -9,6 +9,7 @@ import com.example.Service.CommentService;
 import com.example.domain.Article;
 import com.example.domain.Comment;
 import com.example.form.ArticleForm;
+import com.example.form.CommentForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,8 +25,12 @@ public class ArticleController {
     @Autowired
     private CommentService commentService;
     @ModelAttribute
-    public ArticleForm setUpForm() {
+    public ArticleForm setUpArticleForm() {
     	return new ArticleForm();
+    }
+    @ModelAttribute
+    public CommentForm setUpCommentForm(){
+        return new CommentForm();
     }
     
     @RequestMapping("")
@@ -43,4 +48,21 @@ public class ArticleController {
         model.addAttribute("articleList", articleList);
         return "html/form";
     }
+    @RequestMapping("/articleInsert")
+	public String insertArticle(ArticleForm form,Model model) {
+		Article article=new Article();
+		article.setName(form.getName());
+		article.setContent(form.getContent());
+		articleService.insert(article);
+		return index(model);
+    }
+    @RequestMapping("/commentInsert")
+	public String insertComment(CommentForm form, Model model) {
+		Comment comment=new Comment();
+		comment.setName(form.getName());
+		comment.setContent(form.getContent());
+		comment.setArticleId(Integer.parseInt(form.getArticleId()));
+		commentService.insert(comment);
+		return index(model);
+	}
 }

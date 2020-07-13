@@ -6,7 +6,9 @@ import com.example.domain.Article;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -34,5 +36,9 @@ public class ArticleRepository {
        }
         
     }
-    
+    public void insert(Article article) {
+		String sql="INSERT INTO articles(name, content) VALUES(:name,:content)";
+		SqlParameterSource  param=new MapSqlParameterSource().addValue("name", article.getName()).addValue("content", article.getContent());
+		template.update(sql, param);
+	}
 }

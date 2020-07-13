@@ -30,11 +30,17 @@ public class CommentRepository {
         String sql="SELECT id,name,content,article_id FROM comments WHERE article_id=:articleId ORDER BY id DESC";
         SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
         try {
-            List<Comment> commentList = template.query(sql, COMMENT_ROW_Mapper);
+            List<Comment> commentList = template.query(sql,param, COMMENT_ROW_Mapper);
             return commentList;
         } catch (Exception e) {
             //TODO: handle exception
             return null;
         }
+        
     }
+    public void insert(Comment comment) {
+		String sql="INSERT INTO comments(name,content,article_id) VALUES(:name,:content,:articleId)";
+		SqlParameterSource param=new MapSqlParameterSource().addValue("name", comment.getName()).addValue("content", comment.getContent()).addValue("articleId", comment.getArticleId());
+		template.update(sql, param);
+	}
 }
