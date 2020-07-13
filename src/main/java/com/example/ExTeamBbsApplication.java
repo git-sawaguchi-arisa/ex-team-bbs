@@ -9,5 +9,4 @@ public class ExTeamBbsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ExTeamBbsApplication.class, args);
 	}
-
 }
