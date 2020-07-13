@@ -41,5 +41,4 @@ public class ArticleRepository {
    	   SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
    	   template.update(deleteSql, param);
       }
-    
 }

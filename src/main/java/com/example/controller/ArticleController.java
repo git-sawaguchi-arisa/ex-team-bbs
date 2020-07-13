@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ArticleController {
     @Autowired
     private ArticleService articleService;
+    
     @Autowired
     private CommentService commentService;
+    
     @ModelAttribute
     public ArticleForm setUpForm() {
     	return new ArticleForm();
@@ -42,5 +44,11 @@ public class ArticleController {
 		}
         model.addAttribute("articleList", articleList);
         return "html/form";
+    }
+    @RequestMapping("/delete")
+    public String deleteArticle(int id) {
+ 	   commentService.deleteByArticleId(id);
+ 	   articleService.deleteById(id);
+ 	   return "redirect:/team-bbs";
     }
 }

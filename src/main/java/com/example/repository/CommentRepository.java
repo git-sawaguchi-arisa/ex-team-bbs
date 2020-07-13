@@ -37,4 +37,9 @@ public class CommentRepository {
             return null;
         }
     }
+    public void deleteByArticleId(int articleId) {
+ 	   String deleteSql = "DELETE FROM comments WHERE article_id = :articleId";
+ 	   SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
+ 	   template.update(deleteSql, param);
+    }
 }
