@@ -19,6 +19,9 @@ public class CommentService {
         return commentList;
     }
     public void insert(Comment comment) {
-		commentRepository.insert(comment);
+        commentRepository.insert(comment);
+    }
+    public void deleteByArticleId(int articleId) {
+		commentRepository.deleteByArticleId(articleId);
 	}
 }

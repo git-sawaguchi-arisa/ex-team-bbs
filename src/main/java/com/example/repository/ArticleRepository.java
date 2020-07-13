@@ -41,4 +41,9 @@ public class ArticleRepository {
 		SqlParameterSource  param=new MapSqlParameterSource().addValue("name", article.getName()).addValue("content", article.getContent());
 		template.update(sql, param);
 	}
+    public void deleteById(int id) {
+   	   String deleteSql = "DELETE FROM articles WHERE id = :id";
+   	   SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+   	   template.update(deleteSql, param);
+      }
 }

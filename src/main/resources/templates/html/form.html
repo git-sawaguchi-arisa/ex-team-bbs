@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
   <form action="form.html" th:action="@{/team-bbs/articleInsert}" th:object="${articleForm}">
     投稿者名:<input type="text" th:field="*{name}"><br>
     投稿内容:<textarea th:field="*{content}"></textarea><br>
@@ -38,6 +39,37 @@
     </form>
     <hr>
   </div>
+=======
+  <form action="form.html" th:action="@{/team-bbs}" th:object="${articleForm}">
+投稿者名:<input type="text" th:field="*{name}"><br>
+投稿内容:<textarea th:field="*{content}"></textarea><br>
+<button>記事投稿</button>
+</form>
+<hr>
+<br>
+<div th:each="article:${articleList}">
+投稿者名:<span th:text="${article.name}"></span><br>
+投稿内容:<br>
+<span th:text="${article.content}"></span><br>
+<form action="form.html" th:action="@{/team-bbs/delete}">
+<input type="hidden" name="id" th:value="${article.id}">
+<button>記事削除</button>
+</form>
+<div th:if="${commentList}" th:each="comment:${commentList}">
+コメント者名:<span th:text="${comment.name}"></span><br>
+コメント内容:<br>
+<span th:text="${comment.content}"></span>
+</div>
+<form action="form.html" th:action="@{/}" th:object="${commentForm}">
+名前:<br>
+<input type="text" name="*{name}"><br>
+コメント:<br>
+<textarea name="*{content}"></textarea><br>
+<button>コメント投稿</button>
+</form>
+<hr>
+</div>
+>>>>>>> 5b69f7eef7fb54252b73d646aa175c92da4b6f80
 </body>
 
 </html>

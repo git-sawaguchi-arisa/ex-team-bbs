@@ -43,4 +43,9 @@ public class CommentRepository {
 		SqlParameterSource param=new MapSqlParameterSource().addValue("name", comment.getName()).addValue("content", comment.getContent()).addValue("articleId", comment.getArticleId());
 		template.update(sql, param);
 	}
+    public void deleteByArticleId(int articleId) {
+ 	   String deleteSql = "DELETE FROM comments WHERE article_id = :articleId";
+ 	   SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
+ 	   template.update(deleteSql, param);
+    }
 }
