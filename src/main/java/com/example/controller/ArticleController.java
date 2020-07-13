@@ -8,10 +8,12 @@ import com.example.Service.ArticleService;
 import com.example.Service.CommentService;
 import com.example.domain.Article;
 import com.example.domain.Comment;
+import com.example.form.ArticleForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -21,7 +23,11 @@ public class ArticleController {
     private ArticleService articleService;
     @Autowired
     private CommentService commentService;
-
+    @ModelAttribute
+    public ArticleForm setUpForm() {
+    	return new ArticleForm();
+    }
+    
     @RequestMapping("")
     public String index(Model model){
         List<Article> articleList = articleService.findAll();
